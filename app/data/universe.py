@@ -2,3 +2,4 @@
 
 high_price = ['GDWN.L', 'GAW.L', 'AZN.L', 'NXT.L', 'BGEO.L']
 high_cap = ['AZN.L', 'HSBA.L', 'SHEL.L', 'ULVR.L', 'RR.L', 'BATS.L']
+

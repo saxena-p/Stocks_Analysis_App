@@ -2,12 +2,17 @@ import pandas as pd
 import yfinance as yf
 from universe import high_cap
 
-print ("Fetching data for high cap stocks:", high_cap)
+ftse100 = pd.read_csv('ftse100.csv', index_col=0)
+ftse100['Ticker (on LSE)'] = ftse100['Ticker (on LSE)'] + '.L'
+stocks_list = ftse100['Ticker (on LSE)'].tolist()
 
-def fetch_stock_data(tickers = high_cap):
+print("Fetching data for all stocks in ftse100.csv from Yahoo! Finance.")
+print("Total stocks to fetch:", len(stocks_list))
+
+def fetch_stock_data(tickers = stocks_list):
     data = []
     for ticker in tickers:
-        df = yf.download(ticker, period="6mo", auto_adjust=True)
+        df = yf.download(ticker, period="5y", auto_adjust=True)
         data.append(df)
     
     full_data = pd.concat(data, axis = 1)
