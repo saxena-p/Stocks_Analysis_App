@@ -92,6 +92,10 @@ uvicorn app.main:app --reload
 4. Open in Browser
 - Health check:         http://127.0.0.1:8000/
 - API docs (Swagger):   http://127.0.0.1:8000/docs
+- View results graphically: http://127.0.0.1:8000/api/graph?metric=Return&window=1y&n=5
+
+![Returns](Readme_figs/returns_1y.png)
+
 
 
 ## ✅ Verification Checklist

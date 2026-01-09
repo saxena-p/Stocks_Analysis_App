@@ -158,7 +158,7 @@ if __name__ == "__main__":
     tickers = data.columns.levels[1]
     # print("Computing metrics for tickers:", tickers)
 
-    metrics = pd.DataFrame(columns=['Ticker', 'Return_5d', 'Return_1mo', 'Return_3mo', 'Return_1y', 'Volatility_3mo','Volatility_1y', 'Market Cap', 'P/E Ratio'])
+    metrics = pd.DataFrame(columns=['Ticker', 'Return_5d', 'Return_1mo', 'Return_3mo', 'Return_1y', 'Volatility_3mo','Volatility_1y', 'Market-Cap', 'PE-Ratio'])
     
     # end_date is the date of last working day
     yesterday = date.today() - timedelta(days=1)
@@ -211,8 +211,8 @@ if __name__ == "__main__":
             'Return_1y': ret_1y,
             'Volatility_3mo': vol_3mo,
             'Volatility_1y': vol_1y,
-            'Market Cap': market_cap,
-            'P/E Ratio': pe_ratio
+            'Market-Cap': market_cap,
+            'PE-Ratio': pe_ratio
         }])
         # metrics = pd.concat([metrics, new_row], ignore_index=True)
         metrics.loc[len(metrics)] = new_row.iloc[0]

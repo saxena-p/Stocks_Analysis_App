@@ -3,6 +3,8 @@ from typing import List
 
 from app.api.schemas import StockMetric
 from app.services.metrics_service import MetricsService
+from fastapi.responses import HTMLResponse
+import plotly.express as px
 
 router = APIRouter(prefix="/api", tags=["metrics"])
 
@@ -39,3 +41,37 @@ def top_n_stocks(
         StockMetric(ticker=row["Ticker"], value=row[f"{metric}_{window}"])
         for _, row in df.iterrows()
     ]
+
+
+@router.get("/graph", response_class=HTMLResponse)
+def graph(metric: str, 
+          window: str = "1y", 
+          n: int = 5):
+    
+    ALLOWED_METRICS = {"Return", "Volatility"}
+
+    if metric not in ALLOWED_METRICS:
+        raise HTTPException(400, "Invalid metric")
+    
+    df = service.top_n(metric, window, n)
+
+    fig = px.bar(
+        df,
+        x="Ticker",
+        y=f"{metric}_{window}",
+        title=f"Top {n} stocks by {metric} ({window})",
+        labels={
+            "Ticker": "Ticker",
+            f"{metric}_{window}": metric.capitalize()
+        }
+    )
+
+    if metric == "volatility":
+        fig.update_yaxes(tickformat=".1%")
+    elif metric == "return":
+        fig.update_yaxes(tickformat=".0%")
+
+    return fig.to_html(
+        full_html=True,
+        include_plotlyjs="cdn"
+    )
