@@ -51,6 +51,8 @@ project_root/
 │   └── data/
 │       └── stock_metrics.csv      # Precomputed metrics (data contract)
 ├── requirements.txt
+|── Dockerfile
+|── .dockerignore
 └── README.md
 ```
 
