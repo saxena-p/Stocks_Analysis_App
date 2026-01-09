@@ -75,12 +75,21 @@ BATS.L,-3.7902264600715134,-6.191603316109972,5.4211343679679596,0.2064614780793
 pip install -r requirements.txt
 ```
 
-2. Run from project root
+2. Get updated data for all stocks.
+
+```
+cd app/data
+python fetch_data.py
+python compute_metrics.py
+```
+This should update the files stock_data.csv and stock_metrics.csv with the latest information.
+
+3. Run from project root
 ```
 uvicorn app.main:app --reload
 ```
 
-3. Open in Browser
+4. Open in Browser
 - Health check:         http://127.0.0.1:8000/
 - API docs (Swagger):   http://127.0.0.1:8000/docs
 
