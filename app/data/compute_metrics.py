@@ -39,7 +39,6 @@ def compute_percentage_return(data, ticker, num_days):
     data (DataFrame): DataFrame containing stock data with MultiIndex columns (Attribute, Ticker)
     ticker (str): Stock ticker symbol
     num_days (int): Number of days to compute the return over
-    end_date (str): End date in 'YYYY-MM-DD' format
     
     Returns:
     float: Percentage return

@@ -64,24 +64,15 @@ def graph(metric: str,
     fig = px.bar(
         df,
         x="Ticker",
-        y=y_graph,
+        y= y_graph,
         title=title_graph,
         labels={
             "Ticker": "Ticker",
-            y_graph: metric.capitalize()
+            y_graph: metric
         }
     )
-
-    # if metric == "Volatility":
-    #     fig.update_yaxes(tickformat=".1%")
-    # elif metric == "Return":
-    #     fig.update_yaxes(tickformat=".0%")
 
     return fig.to_html(
         full_html=True,
         include_plotlyjs="cdn"
     )
-
-# Access the graph at: http://127.0.0.1:8000/api/graph?metric=Return&window=1y&n=5 or
-# http://127.0.0.1:8000/api/graph?metric=Volatility&window=1y&n=5
-# window and n are optional parameters with default values 1y and 5 respectively.
