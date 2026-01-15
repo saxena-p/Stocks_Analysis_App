@@ -43,8 +43,12 @@ class MetricsService:
         """
         Return the top n stocks for a given metric and time window.
         """
-        
-        col = f"{metric}_{time_window}"
+
+        if metric == "PE-Ratio" or metric == "Market-Cap":
+            col = metric
+        else:
+            col = f"{metric}_{time_window}"
+            
         if col not in self.metrics_df.columns:
             raise ValueError(f"Metric '{col}' not found in metrics data.")
         

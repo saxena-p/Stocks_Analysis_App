@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Metrics Dashboard</title>
+
+    <!-- Plotly for interactive charts -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 1rem;
+            max-width: 900px;
+        }
+        select, input {
+            padding: 0.3rem;
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+        #chart {
+            margin-top: 1rem;
+        }
+
+        #graphFrame {
+        margin-top: 1rem;
+        width: 100%;
+        height: 700px;
+        border: none;
+    }
+    </style>
+</head>
+<body>
+
+<h1>Stock Metrics Dashboard</h1>
+
+<div class="controls">
+        <!-- Metric -->
+        <select id="metricSelect">
+            <option value="Return" selected>Return</option>
+            <option value="Market-Cap">Market Cap</option>
+            <option value="Volatility">Volatility</option>
+            <option value="PE-Ratio">P/E Ratio</option>
+        </select>
+
+        <!-- Time Window -->
+        <select id="windowSelect">
+            <option value="5d">5 Days</option>
+            <option value="1mo">1 Month</option>
+            <option value="3mo">3 Months</option>
+            <option value="1y" selected>1 Year</option>
+            <option value="3y">3 Years</option>
+        </select>
+
+        <!-- Top N -->
+        <input
+            id="nInput"
+            type="number"
+            min="1"
+            max="50"
+            value="5"
+        />
+
+        <button onclick="updateGraph()">Update</button>
+    </div>
+
+    <!-- Graph -->
+    <iframe id="graphFrame"></iframe>
+
+<script src="/static/main.js"></script>
+
+</body>
+</html>

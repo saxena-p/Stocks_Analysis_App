@@ -48,28 +48,34 @@ def graph(metric: str,
           window: str = "1y", 
           n: int = 5):
     
-    ALLOWED_METRICS = {"Return", "Volatility"}
+    TIME_METRICS = {"Return", "Volatility"}
 
-    if metric not in ALLOWED_METRICS:
-        raise HTTPException(400, "Invalid metric")
+    # if metric not in ALLOWED_METRICS:
+    #     raise HTTPException(400, "Invalid metric")
+    if metric in TIME_METRICS:
+        y_graph = f"{metric}_{window}"
+        title_graph = f"Top {n} stocks by {metric} ({window})"
+    else:
+        y_graph = metric
+        title_graph = f"Top {n} stocks by {metric}"
     
     df = service.top_n(metric, window, n)
 
     fig = px.bar(
         df,
         x="Ticker",
-        y=f"{metric}_{window}",
-        title=f"Top {n} stocks by {metric} ({window})",
+        y=y_graph,
+        title=title_graph,
         labels={
             "Ticker": "Ticker",
-            f"{metric}_{window}": metric.capitalize()
+            y_graph: metric.capitalize()
         }
     )
 
-    if metric == "volatility":
-        fig.update_yaxes(tickformat=".1%")
-    elif metric == "return":
-        fig.update_yaxes(tickformat=".0%")
+    # if metric == "Volatility":
+    #     fig.update_yaxes(tickformat=".1%")
+    # elif metric == "Return":
+    #     fig.update_yaxes(tickformat=".0%")
 
     return fig.to_html(
         full_html=True,

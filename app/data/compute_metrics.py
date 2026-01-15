@@ -158,7 +158,9 @@ if __name__ == "__main__":
     tickers = data.columns.levels[1]
     # print("Computing metrics for tickers:", tickers)
 
-    metrics = pd.DataFrame(columns=['Ticker', 'Return_5d', 'Return_1mo', 'Return_3mo', 'Return_1y', 'Volatility_3mo','Volatility_1y', 'Market-Cap', 'PE-Ratio'])
+    metrics = pd.DataFrame(columns=['Ticker', 'Return_5d', 'Return_1mo', 'Return_3mo', 'Return_1y',
+                                    'Return_3y', 'Volatility_5d', 'Volatility_1mo', 'Volatility_3mo',
+                                      'Volatility_1y','Volatility_3y', 'Market-Cap', 'PE-Ratio'])
     
     # end_date is the date of last working day
     yesterday = date.today() - timedelta(days=1)
@@ -191,11 +193,13 @@ if __name__ == "__main__":
         ret_1y = compute_percentage_return(data, ticker, 252)
         # print("1Y Return for", ticker, "is", ret_1y)
 
-        vol_3mo = compute_volatility(data, ticker, 84)
-        # print("3M Volatility for", ticker, "is", vol_3mo)
+        ret_3y = compute_percentage_return(data, ticker, 252*3)
 
+        vol_5d = compute_volatility(data, ticker, 5)
+        vol_1mo = compute_volatility(data, ticker, 28)
+        vol_3mo = compute_volatility(data, ticker, 84)
         vol_1y = compute_volatility(data, ticker, 252)
-        # print("1Y Volatility for", ticker, "is", vol_1y)
+        vol_3y = compute_volatility(data, ticker, 252*3)
 
         market_cap = get_latest_market_cap(ticker)
         # print("Market Cap for", ticker, "is", market_cap)
@@ -209,8 +213,12 @@ if __name__ == "__main__":
             'Return_1mo': ret_1mo,
             'Return_3mo': ret_3mo,
             'Return_1y': ret_1y,
+            'Return_3y': ret_3y,
+            'Volatility_5d': vol_5d,
+            'Volatility_1mo': vol_1mo,
             'Volatility_3mo': vol_3mo,
             'Volatility_1y': vol_1y,
+            'Volatility_3y': vol_3y,
             'Market-Cap': market_cap,
             'PE-Ratio': pe_ratio
         }])
