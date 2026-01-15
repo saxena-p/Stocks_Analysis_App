@@ -13,7 +13,7 @@ This MVP is designed to be deployed on Azure and embedded into a personal webpag
 ✔ FastAPI backend implemented  
 ✔ Metrics validated and exposed via REST API  
 ✔ Error handling and input validation in place  
-✔ Ready for containerisation and Azure deployment  
+✔ Deployed on Azure via a Docker container -  https://stock-analysis-app-unique.azurewebsites.net/
 
 
 ## 📌 Features (MVP)
@@ -51,8 +51,8 @@ project_root/
 │   └── data/
 │       └── stock_metrics.csv      # Precomputed metrics (data contract)
 ├── requirements.txt
-|── Dockerfile
-|── .dockerignore
+├── Dockerfile
+├── .dockerignore
 └── README.md
 ```
 
@@ -119,8 +119,6 @@ The app is working correctly if:
 
 Planned next phases:
 
-- Containerisation (Docker)
-- Azure App Service Deployment
 - Azure function for daily data updates (11 PM)
 - Frontend visualisation (Plotly / JavaScript)
 - ML-based predictions
